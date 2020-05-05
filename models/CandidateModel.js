@@ -4,7 +4,7 @@ const mongoosePatchUpdate = require('mongoose-patch-update');
 require('mongoose-type-email');
 
 ///Schema declaration
-const RegistrationFormSchema = new mongoose.Schema({
+const CandidateSchema = new mongoose.Schema({
    _id : {
       type: mongoose.Schema.Types.ObjectId,
       auto: true,
@@ -21,16 +21,16 @@ const RegistrationFormSchema = new mongoose.Schema({
       
    //}
 
-   gender : {
-      type: mongoose.Schema.Types.String,
-      required: false,
-      description: "Gênero que o candidato se declara"
-   },
-
-   phoneNumberDDD : {
+   rg : {
       type: mongoose.Schema.Types.String,
       required: true,
-      description: "Telefone com DDD para o contato com o candidato"
+      description: "RG do candidato"
+   },
+
+   cpf : {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      description: "CPF do candidato"
    },
 
    email : {
@@ -43,8 +43,8 @@ const RegistrationFormSchema = new mongoose.Schema({
  });
 
 ///Index Creation
-RegistrationFormSchema.index({createdAt: 1});
-RegistrationFormSchema.index({createdAt: -1});
+CandidateSchema.index({createdAt: 1});
+CandidateSchema.index({createdAt: -1});
 
 //Defining Protected Attributes
 //A principio estou deixando todos protegidos (Usuário não pode mudar sua inscrição)
@@ -61,8 +61,8 @@ const sortableAttributes = [
 ];
 
 //Creating the Schema BoilerPlate
-RegistrationFormSchema.statics.getProtectedAttributes = () => protectedAttributes;
-RegistrationFormSchema.statics.getSortableAttributes = () => sortableAttributes;
-RegistrationFormSchema.plugin(mongoosePaginate);
-RegistrationFormSchema.plugin(mongoosePatchUpdate);
-module.exports = mongoose.model('RegistrationForm',RegistrationFormSchema);
+CandidateSchema.statics.getProtectedAttributes = () => protectedAttributes;
+CandidateSchema.statics.getSortableAttributes = () => sortableAttributes;
+CandidateSchema.plugin(mongoosePaginate);
+CandidateSchema.plugin(mongoosePatchUpdate);
+module.exports = mongoose.model('Candidate',CandidateSchema);

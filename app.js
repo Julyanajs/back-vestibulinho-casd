@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const mongoosePatchUpdate = require('mongoose-patch-update');
-const RegisterFormController = require('./controllers/RegisterFormController');
+const CandidateController = require('./controllers/CandidateController');
 const nconf = require('nconf');
 const defaultConfig = require("./config/defaultConfig.json");
 const shell = require('shelljs');
@@ -36,5 +36,5 @@ mongoose.connect(nconf.get("dbConfig:url"),{
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use('/candidate',CandidateController);
 app.listen(nconf.get());
