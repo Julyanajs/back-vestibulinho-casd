@@ -34,7 +34,7 @@ const RegistrationFormSchema = new mongoose.Schema({
    },
 
    email : {
-      type: mongoose.Schema.Types.email,
+      type: mongoose.Schema.Types.String,
       required: true,
       description: "Email para contato com o candidato"
    }
@@ -65,4 +65,4 @@ RegistrationFormSchema.statics.getProtectedAttributes = () => protectedAttribute
 RegistrationFormSchema.statics.getSortableAttributes = () => sortableAttributes;
 RegistrationFormSchema.plugin(mongoosePaginate);
 RegistrationFormSchema.plugin(mongoosePatchUpdate);
-module.exports = model('RegistrationForm',RegistrationFormSchema);
+module.exports = mongoose.model('RegistrationForm',RegistrationFormSchema);
