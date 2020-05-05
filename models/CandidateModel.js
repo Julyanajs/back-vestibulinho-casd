@@ -50,8 +50,8 @@ CandidateSchema.index({createdAt: -1});
 //A principio estou deixando todos protegidos (Usuário não pode mudar sua inscrição)
 const protectedAttributes = [ 
    'name',
-   'gender',
-   'phoneNumberDDD',
+   'rg',
+   'cpf',
    'email'
 ];
 
