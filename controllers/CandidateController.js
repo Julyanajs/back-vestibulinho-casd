@@ -4,7 +4,6 @@ const CandidateService = require('../services/CandidateService');
 const router = express.Router();
 
 router.get('/checkCandidate', async (req,res,next) => {
-   console.log(req);
    const candidate = await CandidateService.getByRg(req.query);
    const candidateBool = candidate ? true:false;
    res.status(200).json({
