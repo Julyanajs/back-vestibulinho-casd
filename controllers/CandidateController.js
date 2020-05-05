@@ -15,14 +15,10 @@ router.post('/createCandidate', async(req,res,next) => {
    console.log("oi");
    try{
       const createdCandidate = await CandidateService.create(req.body.data);
-      res.status(200).json({
-         createdCandidate: true
-      });
+      res.status(200).send();
    }catch(error){
       console.log(error);
-      res.status(400).json({
-         createdCandidate: false
-      });
+      res.status(400).send();
    }
    next();
 });
