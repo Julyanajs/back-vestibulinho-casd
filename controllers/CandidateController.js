@@ -4,7 +4,8 @@ const CandidateService = require('../services/CandidateService');
 const router = express.Router();
 
 router.get('/checkCandidate', async (req,res,next) => {
-   const candidate = await CandidateService.getByRg(req.body.data);
+   console.log(req);
+   const candidate = await CandidateService.getByRg(req.query);
    const candidateBool = candidate ? true:false;
    res.status(200).json({
       candidateBool
@@ -12,9 +13,8 @@ router.get('/checkCandidate', async (req,res,next) => {
    next();
 });
 router.post('/createCandidate', async(req,res,next) => {
-   console.log("oi");
    try{
-      const createdCandidate = await CandidateService.create(req.body.data);
+      const createdCandidate = await CandidateService.create(req.body);
       res.status(200).send();
    }catch(error){
       console.log(error);
