@@ -34,26 +34,31 @@ Outras dependências utilizadas:
 Front-end foi desenvolvido utilizando [React](https://pt-br.reactjs.org/), pode ser encontrado no seu respectivo [repositório](https://github.com/bambokianr/front-vestibulinho-casd).
 
 ### Iniciando a API
-Verificar se existe [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [mongoDB](https://www.mongodb.com/) e [docker](https://www.docker.com/)instalados na sua máquina antes de iniciar com o projeto. 
+Verificar se existe [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [mongoDB](https://www.mongodb.com/) e [docker](https://www.docker.com/) instalados na sua máquina antes de iniciar com o projeto. 
 
 ```bash
 # Primeira utilização
 # Clone o repositório front-end
 $ git clone https://github.com/lulis123/back-vestibulinho-casd
 
+# Primeira utilização
 # Entre no repositório
 $ cd front-vestibulinho-casd
 
+# Primeira utilização
 # Instale as dependências que estão presentes no arquivo 'package.json'
 $ npm install
 
+# Primeira utilização
 # Instalar Docker e mongo, caso não os tenha instalado.
 $ chmod +x installDockerMongo.sh
 $ ./installDockerMongo.sh
 
-# Subir o DB (debe ser feito sempre)
+# Sempre
+# Subir o DB
 $ ./runMongoDB.sh
 
+#Sempre
 # Rodar a API
 $ npm start
 ```
