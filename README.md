@@ -6,9 +6,9 @@ Projeto do back-end para gerar o DB e definir a API para o funcioanmento das fer
 > [Estrutura do DB] (https://whimsical.com/WZW7i9LaUyAwcf5cXYHZQh)
 
 ### Tecnologias
-API desenvolvida em [Node](https://nodejs.org/en/), utilizando o [express](https://expressjs.com/) como framework web.__
-DB criado utilizando [MongoDB](https://www.mongodb.com/)__
-Outras dependências utilizadas:
+API desenvolvida em [Node](https://nodejs.org/en/), utilizando o [express](https://expressjs.com/) como framework web. <br/>
+DB criado utilizando [MongoDB](https://www.mongodb.com/). <br/>
+Outras dependências utilizadas: 
  - [body-parser](https://www.npmjs.com/package/body-parser) - adiciona um middleware de parse para formatar o body de requests.
  - [cors](https://www.npmjs.com/package/cors) - configura a cors da API, permitindo rodar front e back-end localmente simultaneamente.
  - [express]()
