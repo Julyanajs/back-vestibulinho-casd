@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const mongoosePatchUpdate = require('mongoose-patch-update');
 const CandidateController = require('./controllers/CandidateController');
+const additionalInfoController = require('./controllers/additionalInfoController');
+
 const nconf = require('nconf');
 const defaultConfig = require("./config/defaultConfig.json");
 const shell = require('shelljs');
@@ -37,4 +39,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use('/candidate',CandidateController);
+app.use('/additionalInfo',additionalInfoController);
+
 app.listen(nconf.get());
