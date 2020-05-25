@@ -7,8 +7,15 @@ class CandidateService {
    }
    
    async create(CandidateData){
+      let candidateExists = await CandidateModel.exists({rg: CandidateData.rg});
+      if (candidateExists)
+         return null;
       const Candidate = new CandidateModel(CandidateData);
       return this.toObject(await Candidate.save()) 
+   }
+
+   async getAll() {
+      return await CandidateModel.find().lean();
    }
 
    async getById({_id}){
@@ -19,8 +26,22 @@ class CandidateService {
       return await CandidateModel.findOne({rg}).lean();
    }
 
-   async deleteById({_id}){
-      await CandidateModel.deleteOne({_id});
+   async updateByRg(CandidateData) {
+      let candidateExists = await CandidateModel.exists({rg: CandidateData.rg});
+      if (!candidateExists)
+         return null;
+      return await CandidateModel.replaceOne({rg: CandidateData.rg}, CandidateData)
+   }
+
+   async deleteByRg({rg}) {
+      let candidateExists = await CandidateModel.exists({rg});
+      if (!candidateExists)
+         return null;
+      return await CandidateModel.deleteOne({rg});
+   }
+
+   async deleteAll() {
+      return await CandidateModel.deleteMany();
    }
 }
 
