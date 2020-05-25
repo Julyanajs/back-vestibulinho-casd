@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const mongoosePatchUpdate = require('mongoose-patch-update');
 const CandidateController = require('./controllers/CandidateController');
 const additionalInfoController = require('./controllers/additionalInfoController');
-
+const autoIncrement = require('mongoose-auto-increment');
 const nconf = require('nconf');
-const defaultConfig = require("./config/defaultConfig.json");
+const defaultConfig = require("./config/defaultConfig");
 const shell = require('shelljs');
 const autoIncrement = require('mongoose-auto-increment');
 const cors = require('cors')
@@ -31,8 +31,10 @@ mongoose.connect(nconf.get("dbConfig:url"),{
    autoIncrement.initialize(connection);
 }).catch( err => {
    console.log('error connecting to MongoDB');
+   console.log(err);
    process.exit();
 });
+
 
 
 app.use(cors());

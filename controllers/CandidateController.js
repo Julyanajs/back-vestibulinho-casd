@@ -22,6 +22,8 @@ router.get('/checkCandidate/all', async (req,res,next) => {
    });
    next();
 });
+
+
 router.post('/createCandidate', async(req,res,next) => {
    try{
       const createdCandidate = await CandidateService.create(req.body);

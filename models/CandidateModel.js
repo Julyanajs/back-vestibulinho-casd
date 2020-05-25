@@ -35,7 +35,13 @@ const CandidateSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.String,
       required: true,
       description: "Email para contato com o candidato"
-   }
+   },
+
+   additionalInfo:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'AdditionalInfo',
+      description: "Informações adicionais do candidato"
+   },
 }, {
    timestamps: true
  });

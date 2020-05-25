@@ -5,10 +5,17 @@ require('mongoose-type-email');
 
 ///Schema declaration 
 const additionalInfoSchema = new mongoose.Schema({
+   
    _id:{
       type:mongoose.Schema.Types.ObjectId,
       auto:true,
       description:"Auto generated id for the submitted form"
+   },
+
+   candidate:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Candidate',
+      description: "Objeto candidato que está relacionado com o additional info"
    },
 
    gender:{
