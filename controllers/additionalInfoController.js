@@ -15,6 +15,7 @@ router.get('/checkadditionalInfo', async (req,res,next) => {
 
 router.post('/createadditionalInfo', async(req,res,next) => {
    try{
+      console.log("oi");
       const createdadditionalInfo = await additionalInfoService.create(req.body);
       res.status(200).send();
    }catch(error){

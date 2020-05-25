@@ -1,6 +1,6 @@
 const express = require('express');
-const CandidateService = require('../services/CandidateService');
-
+const CandidateService = require('../services/candidateService');
+const candidateMiddleware = require("../middleware/candidateMiddleware");
 const router = express.Router();
 
 router.get('/checkCandidate', async (req,res,next) => {
@@ -15,6 +15,7 @@ router.get('/checkCandidate', async (req,res,next) => {
    }
    next();
 });
+
 router.get('/checkCandidate/all', async (req,res,next) => {
    const candidate = await CandidateService.getAll(req.query);
    res.status(200).json({
@@ -24,19 +25,23 @@ router.get('/checkCandidate/all', async (req,res,next) => {
 });
 
 
-router.post('/createCandidate', async(req,res,next) => {
-   try{
-      const createdCandidate = await CandidateService.create(req.body);
-      if (createdCandidate != null)
-         res.status(200).send({createdCandidate});
-      else
-         res.status(404).send({ error: "Candidate already exists!" });
-   }catch(error){
-      console.log(error);
-      res.status(400).send();
+router.post('/createCandidate',
+   candidateMiddleware.preSave,
+   async(req,res,next) => {
+      try{
+         const createdCandidate = await CandidateService.create(req.body);
+         if (createdCandidate != null)
+            res.status(200).send({createdCandidate});
+         else
+            res.status(404).send({ error: "Candidate already exists!" });
+      }catch(error){
+         console.log(error);
+         res.status(400).send();
+      }
+      next();
    }
-   next();
-});
+);
+
 router.put('/updateCandidate', async(req,res,next) => {
    try{
       const updatedCandidate = await CandidateService.updateByRg(req.body);
@@ -50,6 +55,7 @@ router.put('/updateCandidate', async(req,res,next) => {
    }
    next();
 });
+
 router.delete('/deleteCandidate', async(req,res,next) => {
    try{
       const deletedCandidate = await CandidateService.deleteByRg(req.query);
@@ -63,6 +69,7 @@ router.delete('/deleteCandidate', async(req,res,next) => {
    }
    next();
 });
+
 router.delete('/deleteCandidate/all', async(req,res,next) => {
    try{
       const deletedCandidate = await CandidateService.deleteAll();

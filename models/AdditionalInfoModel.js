@@ -5,7 +5,7 @@ require('mongoose-type-email');
 
 ///Schema declaration 
 const additionalInfoSchema = new mongoose.Schema({
-   
+
    _id:{
       type:mongoose.Schema.Types.ObjectId,
       auto:true,
@@ -60,7 +60,7 @@ const additionalInfoSchema = new mongoose.Schema({
       numberStreet:{type:mongoose.Schema.Types.Number,required:true,description:"Número da Rua"},
       neighborhood:{type:mongoose.Schema.Types.String,required:true,description:"Bairro"},
       city:{type:mongoose.Schema.Types.String,required:true,description:"Cidade"},
-      city:{type:mongoose.Schema.Types.String,required:true,description:"Estado"},
+      state:{type:mongoose.Schema.Types.String,required:true,description:"Estado"},
    },
 
    ifSpecialNecessity:{

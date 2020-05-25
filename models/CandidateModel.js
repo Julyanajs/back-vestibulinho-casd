@@ -4,6 +4,7 @@ const mongoosePatchUpdate = require('mongoose-patch-update');
 const nconf = require('nconf');
 const autoIncrement = require('mongoose-plugin-autoinc');
 require('mongoose-type-email');
+console.log(nconf);
 
 ///Schema declaration
 const CandidateSchema = new mongoose.Schema({
@@ -11,6 +12,11 @@ const CandidateSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       auto: true,
       description: "Auto generated id for the submitted form"
+   },
+
+   canidateNumber:{
+      type: mongoose.Schema.Types.Number,
+      description: "Numero de matricula autoincremental"
    },
 
    name:{
@@ -72,7 +78,7 @@ CandidateSchema.plugin(mongoosePatchUpdate);
 CandidateSchema.plugin(autoIncrement.plugin, {
    model: 'Candidate',
    field: 'candidateNumber',
-   startAt: nconf.get("startingCandidateNumberCASDVEST"),
+   startAt: 2100000,
    incrementBy: 1
 });
 
