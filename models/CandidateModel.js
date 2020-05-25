@@ -4,7 +4,6 @@ const mongoosePatchUpdate = require('mongoose-patch-update');
 const nconf = require('nconf');
 const autoIncrement = require('mongoose-plugin-autoinc');
 require('mongoose-type-email');
-console.log(nconf);
 
 ///Schema declaration
 const CandidateSchema = new mongoose.Schema({

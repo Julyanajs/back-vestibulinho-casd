@@ -12,12 +12,6 @@ const additionalInfoSchema = new mongoose.Schema({
       description:"Auto generated id for the submitted form"
    },
 
-   candidate:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Candidate',
-      description: "Objeto candidato que está relacionado com o additional info"
-   },
-
    gender:{
       type:mongoose.Schema.Types.String,
       required:true,
