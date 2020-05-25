@@ -47,6 +47,12 @@ const CandidateSchema = new mongoose.Schema({
       ref: 'AdditionalInfo',
       description: "Informações adicionais do candidato"
    },
+
+   candidateStatus:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'CandidateStatus',
+      description: "Status do candidato"
+   }
 }, {
    timestamps: true
  });

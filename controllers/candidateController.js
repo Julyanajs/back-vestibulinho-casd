@@ -26,7 +26,8 @@ router.get('/checkCandidate/all', async (req,res,next) => {
 
 
 router.post('/createCandidate',
-   candidateMiddleware.preSave,
+   candidateMiddleware.preSaveAdditionalInfo,
+   candidateMiddleware.preSaveCandidateStatus,
    async(req,res,next) => {
       try{
          const createdCandidate = await CandidateService.create(req.body);
