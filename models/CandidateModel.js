@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const mongoosePatchUpdate = require('mongoose-patch-update');
-const autoIncrement = require('mongoose-auto-increment');
 const nconf = require('nconf');
+const autoIncrement = require('mongoose-plugin-autoinc');
 require('mongoose-type-email');
 
 ///Schema declaration

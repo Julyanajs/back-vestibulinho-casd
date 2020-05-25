@@ -1,4 +1,4 @@
-const additionalInfoModel = require('../models/additionalInfoModel');
+const additionalInfoModel = require('../models/AdditionalInfoModel');
 
 class additionalInfoService {
    
