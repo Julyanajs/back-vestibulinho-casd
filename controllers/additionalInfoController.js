@@ -11,6 +11,8 @@ router.get('/checkadditionalInfo', async (req,res,next) => {
    });
    next();
 });
+
+
 router.post('/createadditionalInfo', async(req,res,next) => {
    try{
       const createdadditionalInfo = await additionalInfoService.create(req.body);
