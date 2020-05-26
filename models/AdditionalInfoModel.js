@@ -12,6 +12,12 @@ const additionalInfoSchema = new mongoose.Schema({
       description:"Auto generated id for the submitted form"
    },
 
+   birthDate: {
+      type: mongoose.Schema.Types.String,
+      required: true,
+      decription: "Data de nascimento no formato DD/MM/AAAA"
+   },
+
    gender:{
       type:mongoose.Schema.Types.String,
       required:true,
@@ -41,12 +47,6 @@ const additionalInfoSchema = new mongoose.Schema({
       required:false,
       description:"Telefone 2 (Não Obrigatório)"
    },
-
-   cep:{
-      type:mongoose.Schema.Types.String,
-      required:true,
-      description:"CEP Endereço"
-   },
    	
 	address:{
       additionalAddress:{type:mongoose.Schema.Types.String,required:false,description:"Complemento Endereço"},
@@ -55,10 +55,11 @@ const additionalInfoSchema = new mongoose.Schema({
       neighborhood:{type:mongoose.Schema.Types.String,required:true,description:"Bairro"},
       city:{type:mongoose.Schema.Types.String,required:true,description:"Cidade"},
       state:{type:mongoose.Schema.Types.String,required:true,description:"Estado"},
+      cep: {type: mongoose.Schema.Types.String, required:true, description:"CEP"}
    },
 
    ifSpecialNecessity:{
-      type:mongoose.Schema.Types.Boolean,
+      type:mongoose.Schema.Types.String,
       required:true,
       description:"Se o candidato tem necessidade especial"
    },
@@ -81,7 +82,7 @@ const additionalInfoSchema = new mongoose.Schema({
       description:"Qual escola o aluno estudou"
    },
 
-	typeSchool:{
+	kindSchool:{
       type:mongoose.Schema.Types.String,
       required:true,
       description:"Qual tipo Escola"

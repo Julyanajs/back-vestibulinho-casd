@@ -7,6 +7,7 @@ class additionalInfoService {
    }
    
    async create(additionalInfoData){
+      console.log(additionalInfoData);
       const additionalInfo = new additionalInfoModel(additionalInfoData);
       return this.toObject(await additionalInfo.save()) 
    }

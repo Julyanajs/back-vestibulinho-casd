@@ -7,9 +7,9 @@ router.get('/checkCandidate', async (req,res,next) => {
    try {
       const candidate = await CandidateService.getByRg(req.query);
       if (candidate != null)
-         res.status(200).json({candidate});
+         res.status(201).json({candidate});
       else
-         res.status(404).send({ error: "Candidate doesn't exist!" });
+         res.status(204).send();
    } catch {
       res.status(404).send({ error: "Error" });
    }
@@ -34,7 +34,7 @@ router.post('/createCandidate',
          if (createdCandidate != null)
             res.status(200).send({createdCandidate});
          else
-            res.status(404).send({ error: "Candidate already exists!" });
+            res.status(403).send({ error: "Candidate already exists!" });
       }catch(error){
          console.log(error);
          res.status(400).send();

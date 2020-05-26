@@ -2,7 +2,7 @@ const additionalInfoService = require('../services/additionalInfoService');
 const candidateStatusService = require('../services/candidateStatusService');
 
 module.exports.preSaveAdditionalInfo = async (req,res,next) => {
-   const addiotnalInfo = await additionalInfoService.create(req.body.additionalInfo);
+   const addiotnalInfo = await additionalInfoService.create(req.body);
    console.log(addiotnalInfo);
    req.body.additionalInfo = addiotnalInfo._id;
    next();
