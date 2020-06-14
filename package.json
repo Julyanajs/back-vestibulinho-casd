@@ -17,6 +17,7 @@
     "mongoose-patch-update": "^1.0.6",
     "mongoose-plugin-autoinc": "^1.1.9",
     "mongoose-type-email": "^1.0.12",
+    "morgan": "^1.10.0",
     "nconf": "^0.10.0",
     "nodemon": "^2.0.4",
     "pull": "^2.1.1",
