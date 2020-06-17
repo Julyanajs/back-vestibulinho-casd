@@ -1,4 +1,5 @@
 const CandidateModel = require('../models/CandidateModel');
+const AdditionalInfoModel = require('../models/AdditionalInfoModel');
 
 class CandidateService {
    
@@ -17,7 +18,22 @@ class CandidateService {
    async getAll() {
       return await CandidateModel.find().lean();
    }
-
+   
+ async populateAll() {
+	const listCandidates = await CandidateModel.find();
+	 
+	const populatedList = listCandidates.map(async  p=> {
+		console.log(p)
+		p = await p.populate('additionalInfo')
+		console.log(p)
+	});
+	 return populatedList;
+   }
+   
+   
+   
+   
+   
    async getById({_id}){
       return await CandidateModel.findById(_id).lean();
    }
