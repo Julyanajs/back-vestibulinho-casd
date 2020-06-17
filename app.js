@@ -9,7 +9,7 @@ const defaultConfig = require("./config/defaultConfig");
 const shell = require('shelljs');
 const cors = require('cors')
 const app = express();
-
+const morgan = require('morgan');
 //Setting up mongodb
 shell.exec('./runMongoDB.sh');
 
@@ -31,6 +31,9 @@ mongoose.connect(nconf.get("dbConfig:url"),{
    console.log(err);
    process.exit();
 });
+
+//Setting up morgan
+app.use(morgan('combined'));
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
