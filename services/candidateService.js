@@ -49,7 +49,10 @@ class CandidateService {
    }
    
    async getById({_id}){
-      return await CandidateModel.findById(_id).populate('additionalInfo').populate('candidateStatus').lean();
+      console.log(_id);
+      const candidate = await CandidateModel.findOne({_id}).populate('additionalInfo').populate('candidateStatus').lean();
+      console.log(candidate);
+      return candidate;
    }
 
    async getByRg({rg}){
