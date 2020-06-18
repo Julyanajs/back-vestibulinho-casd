@@ -2,8 +2,11 @@ const additionalInfoService = require('../services/additionalInfoService');
 const candidateStatusService = require('../services/candidateStatusService');
 
 module.exports.preSaveAdditionalInfo = async (req,res,next) => {
-
-   const additionalInfoData = req.body.adittionalInfo ? req.body.adittionalInfo:req.body;
+   let additionalInfoData = {};
+   if(req.body.hasOwnProperty('additionalInfo'))
+      additionalInfoData = req.body.additionalInfo;
+   else
+      additionalInfoData = req.body;
    const addiotnalInfo = await additionalInfoService.create(additionalInfoData);
    console.log(addiotnalInfo);
    req.body.additionalInfo = addiotnalInfo._id;
@@ -11,7 +14,11 @@ module.exports.preSaveAdditionalInfo = async (req,res,next) => {
 }  
 
 module.exports.preSaveCandidateStatus = async (req,res,next) => {
-   const candidateStatusData = req.body.candidateStatus ? req.body.candidateStatus:req.body;
+   let candidateStatusData = {};
+   if(req.body.hasOwnProperty('candidateStatus'))
+      candidateStatusData = req.body.candidateStatus;
+   else
+      candidateStatusData = req.body;
    const candidateStatus = await candidateStatusService.create(candidateStatusData);
    console.log(candidateStatus);
    req.body.candidateStatus = candidateStatus._id;
@@ -19,48 +26,41 @@ module.exports.preSaveCandidateStatus = async (req,res,next) => {
 }
 
 module.exports.deleteAdditionalInfoIfError = async (req,res,next) => {
-   console.log("DeleteAdditionalInfo");
    if(res.locals.createdOk){
       next();
    }else {
-      console.log(req.body);
       await additionalInfoService.deleteById({_id:req.body.additionalInfo});
    }
    next();
 }
 
 module.exports.deleteCandidateStatusIfError = async(req,res,next) => {
-   console.log("DeleteCandidateStatus");
-   console.log(res.locals);
    if(res.locals.createdOk)
       next();
    else{
-      console.log(res.locals);
       await candidateStatusService.deleteById({_id: req.body.candidateStatus});
    }
       next();
 }
 
 module.exports.posUpdateCandidateStauts = async(req, res, next) => {
-   console.log(res.locals.udpatedOk);
-   if(!res.locals.udpatedOk)
+   if(!res.locals.updatedOk)
       next();
    else{
-      const candidateStautsData = req.body;
-      candidateStatusData._id = req.body.candidateStatus;
-      candidateStatusService.patchUpdate({_id: candidateStautsData._id}, candidateStautsData);
+      const candidateStatusData = req.body.candidateStatus ? req.body.candidateStatus:req.body;
+      candidateStatusData._id = res.locals.candidateStatusId;
+      candidateStatusService.updateById(candidateStatusData);
       next();
    }
 }
 
 module.exports.posUpdateAdditionalInfo = async(req,res,next) => {
-   console.log(res.locals.udpatedOk);
-   if(!res.locals.udpatedOk)
+   if(!res.locals.updatedOk)
       next();
    else{
-      const additionalInfoData = req.body;
-      additionalInfoData._id = req.body.addiotnalInfo;
-      additionalInfoService.patchUpdate({_id: additionalInfoData._id}, additionalInfoData);
+      const additionalInfoData = req.body.additionalInfo ? req.body.additionalInfo:req.body;
+      additionalInfoData._id = res.locals.additionalInfoId;
+      additionalInfoService.updateById(additionalInfoData);
       next();
    }
 }

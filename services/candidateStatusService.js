@@ -14,8 +14,8 @@ class CandidateStatusSerivce{
    async updateById(candidateStatusData){
       const candidateStatusExists = await CandidateStatusModel.exists({_id: candidateStatusData._id})
       if(!candidateStatusExists)
-         return
-      CandidateStatusModel.patchUpdate({_id:candidateStatusData._id}, candidateStatusData);
+         return;
+      const updatedStatus =  await CandidateStatusModel.patchUpdate({_id:candidateStatusData._id}, candidateStatusData);
    }
 
    async deleteById({_id}){

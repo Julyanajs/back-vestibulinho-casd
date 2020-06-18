@@ -16,7 +16,10 @@ class additionalInfoService {
       const additionalInfoExists = await additionalInfoModel.exists({_id:additionalInfoData._id})
       if(!additionalInfoExists)
          return;
-      additionalInfoModel.patchUpdate({_id:additionalInfoData._id}, additionalInfoData);
+      console.log(additionalInfoExists);
+      const updatedInfo = await additionalInfoModel.patchUpdate({_id:additionalInfoData._id}, additionalInfoData);
+      console.log("Updated info");
+      console.log(updatedInfo);
    }
 
    async getById({_id}){

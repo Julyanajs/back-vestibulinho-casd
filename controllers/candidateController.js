@@ -85,7 +85,6 @@ router.post('/createCandidate',
          if (createdCandidate != null){
             res.status(200).send({createdCandidate});
             res.locals.createdOk = true;
-            console.log(res.locals);
          }
          else
             res.status(403).send({ error: "Candidate already exists!" });
@@ -106,8 +105,9 @@ router.put('/updateCandidate', async(req,res,next) => {
       const updatedCandidate = await CandidateService.updateByRg(req.body);
       if (updatedCandidate != null){
          res.locals.updatedOk = true;
+         res.locals.additionalInfoId = updatedCandidate.additionalInfo;
+         res.locals.candidateStatusId = updatedCandidate.candidateStatus;
          res.status(200).send({updatedCandidate});
-         console.log(res.locals);
       }
       else
          res.status(404).send({ error: "Candidate doesn't exists!" });

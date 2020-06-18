@@ -28,7 +28,6 @@ const CandidateStatusSchema = new mongoose.Schema({
    },
 
 
-
    roomId: {
       type: mongoose.Schema.Types.String,
       required: false,
