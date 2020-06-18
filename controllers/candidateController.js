@@ -19,7 +19,7 @@ router.get('/checkCandidate', async (req,res,next) => {
    next();
 });
 
-router.get('/checkCandidate/all', async (req,res,next) => {
+router.get('/getAll', async (req,res,next) => {
    const candidate = await CandidateService.getAll(req.query);
    res.status(200).json({
       candidate
@@ -29,7 +29,7 @@ router.get('/checkCandidate/all', async (req,res,next) => {
 
 
 router.get('/exportCandidate/all', async (req,res,next) => {
- 
+
 	 next();
 }, sheetMiddleware.exportExcel);
 
@@ -86,6 +86,7 @@ router.put('/updateCandidate', async(req,res,next) => {
       if (updatedCandidate != null){
          res.locals.updatedOk = true;
          res.status(200).send({updatedCandidate});
+         console.log(res.locals);
       }
       else
          res.status(404).send({ error: "Candidate doesn't exists!" });
