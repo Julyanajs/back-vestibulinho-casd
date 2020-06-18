@@ -16,34 +16,46 @@ module.exports.preSaveCandidateStatus = async (req,res,next) => {
 }
 
 module.exports.deleteAdditionalInfoIfError = async (req,res,next) => {
-   if(res.body.createdOk)
+   console.log("DeleteAdditionalInfo");
+   if(res.locals.createdOk){
       next();
-   console.log(res.body);
-   await candidateStatusService.deleteById({_id:req.body.candidateStatus});
+   }else {
+      console.log(req.body);
+      await additionalInfoService.deleteById({_id:req.body.additionalInfo});
+   }
    next();
 }
 
 module.exports.deleteCandidateStatusIfError = async(req,res,next) => {
-   if(res.body.createdOk)
+   console.log("DeleteCandidateStatus");
+   console.log(res.locals);
+   if(res.locals.createdOk)
       next();
-   console.log(res.body);
-   await additionalInfoService.deleteById({_id: req.body.addiotnalInfo});
-   next();
+   else{
+      console.log(res.locals);
+      await candidateStatusService.deleteById({_id: req.body.candidateStatus});
+   }
+      next();
 }
 
 module.exports.posUpdateCandidateStauts = async(req, res, next) => {
-   if(!res.body.udpatedOk)
-      return;
-   const candidateStautsData = req.body;
-   candidateStatusData._id = req.body.candidateStatus;
-
-   candidateStatusService.patchUpdate({_id: candidateStautsData._id}, candidateStautsData);
+   if(!res.locals.udpatedOk)
+      next();
+   else{
+      const candidateStautsData = req.body;
+      candidateStatusData._id = req.body.candidateStatus;
+      candidateStatusService.patchUpdate({_id: candidateStautsData._id}, candidateStautsData);
+      next();
+   }
 }
 
 module.exports.posUpdateAdditionalInfo = async(req,res,next) => {
-   if(!res.body.udpatedOk)
-      return
-   const additionalInfoData = req.body;
-   additionalInfoData._id = req.body.addiotnalInfo;
-   additionalInfoService.patchUpdate({_id: additionalInfoData._id}, additionalInfoData);
+   if(!res.locals.udpatedOk)
+      return;
+   else{
+      const additionalInfoData = req.body;
+      additionalInfoData._id = req.body.addiotnalInfo;
+      additionalInfoService.patchUpdate({_id: additionalInfoData._id}, additionalInfoData);
+      next();
+   }
 }
