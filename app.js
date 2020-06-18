@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoosePatchUpdate = require('mongoose-patch-update');
 const CandidateController = require('./controllers/candidateController');
 const additionalInfoController = require('./controllers/additionalInfoController');
+const RoomController = require('./controllers/roomController');
 const nconf = require('nconf');
 const defaultConfig = require("./config/defaultConfig");
 const shell = require('shelljs');
@@ -40,4 +41,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use('/candidate',CandidateController);
 app.use('/additionalInfo',additionalInfoController);
+app.use('/room',RoomController);
+
 app.listen(nconf.get());

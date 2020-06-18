@@ -2,8 +2,8 @@ const express = require('express');
 const CandidateService = require('../services/candidateService');
 const candidateMiddleware = require("../middleware/candidateMiddleware");
 const sheetMiddleware = require("../middleware/sheetMiddleware");
-
-
+const candidateStatusService = require('../services/candidateStatusService');
+const additionalInfoService = require('../services/additionalInfoService');
 const router = express.Router();
 
 router.get('/checkCandidate', async (req,res,next) => {
@@ -57,11 +57,14 @@ router.get('/exportCandidate/all', async (req,res,next) => {
 
 router.post('/createCandidateList',
 	sheetMiddleware.SaveCandidatesList,
-	sheetMiddleware.preSaveAdditionalInfoList,
-	sheetMiddleware.preSaveCandidateStatusList,
    async(req,res,next) => {	   
 	   req.data.forEach(async p => {		 
 			try{
+
+			const addiotnalInfo = await additionalInfoService.create(p);
+			 p.additionalInfo = addiotnalInfo._id;
+			 const candidateStatus = await candidateStatusService.create(p);
+			p.candidateStatus = candidateStatus._id;
 			const createdCandidate = await CandidateService.create(p);
 			if (createdCandidate != null)
 				res.status(200).send({createdCandidate});
