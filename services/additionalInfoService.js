@@ -1,39 +1,39 @@
-const additionalInfoModel = require('../models/AdditionalInfoModel');
+const AdditionalInfoModel = require('../models/AdditionalInfoModel');
 
-class additionalInfoService {
+class AdditionalInfoService {
    
-   toObject(additionalInfoModel){
-      return additionalInfoModel ? additionalInfoModel.toObject() : null;
+   toObject(AdditionalInfoModel){
+      return AdditionalInfoModel ? AdditionalInfoModel.toObject() : null;
    }
    
    async create(additionalInfoData){
       console.log(additionalInfoData);
-      const additionalInfo = new additionalInfoModel(additionalInfoData);
+      const additionalInfo = new AdditionalInfoModel(additionalInfoData);
       return this.toObject(await additionalInfo.save()) 
    }
 
    async updateById(additionalInfoData){
-      const additionalInfoExists = await additionalInfoModel.exists({_id:additionalInfoData._id})
+      const additionalInfoExists = await AdditionalInfoModel.exists({_id:additionalInfoData._id})
       if(!additionalInfoExists)
          return;
       console.log(additionalInfoExists);
-      const updatedInfo = await additionalInfoModel.patchUpdate({_id:additionalInfoData._id}, additionalInfoData);
+      const updatedInfo = await AdditionalInfoModel.patchUpdate({_id:additionalInfoData._id}, additionalInfoData);
       console.log("Updated info");
       console.log(updatedInfo);
    }
 
    async getById({_id}){
-      return await additionalInfoModel.findById(_id).lean();
+      return await AdditionalInfoModel.findById(_id).lean();
    }
 
    async getByCep({cep}){
-      return await additionalInfoModel.findOne({cep}).lean();
+      return await AdditionalInfoModel.findOne({cep}).lean();
    }
 
    async deleteById({_id}){
-      await additionalInfoModel.deleteOne({_id});
+      await AdditionalInfoModel.deleteOne({_id});
    }
 }
 
-const additionalInfoServiceInstance = new additionalInfoService();
-module.exports = additionalInfoServiceInstance
+const AdditionalInfoServiceInstance = new additionalInfoService();
+module.exports = AdditionalInfoServiceInstance

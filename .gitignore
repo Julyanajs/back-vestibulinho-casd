@@ -1,3 +1,4 @@
 toDo
 node_modules/
 .env
+middleware.js

@@ -1,5 +1,5 @@
 const express = require('express');
-const CandidateService = require('../services/candidateService');
+const candidateService = require('../services/candidateService');
 const candidateMiddleware = require("../middleware/candidateMiddleware");
 const sheetMiddleware = require("../middleware/sheetMiddleware");
 const candidateStatusService = require('../services/candidateStatusService');
@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/checkCandidate', async (req,res,next) => {
    try {
-      const candidate = await CandidateService.getByRg(req.query);
+      const candidate = await candidateService.getByRg(req.query);
       if (candidate != null)
          res.status(201).json({candidate});
       else
@@ -21,7 +21,7 @@ router.get('/checkCandidate', async (req,res,next) => {
 
 router.get('/checkCandidateId', async(req,res,next) => {
    try{
-      const candidate = await CandidateService.getById(req.query);
+      const candidate = await candidateService.getById(req.query);
       if(candidate != null)
          res.status(201).json({candidate});
       else
@@ -33,7 +33,7 @@ router.get('/checkCandidateId', async(req,res,next) => {
 });
 
 router.get('/getPage', async(req,res,next) => {
-   const candidate = await CandidateService.getPage(req.query);
+   const candidate = await candidateService.getPage(req.query);
    res.status(200).json({
       candidate
    });
@@ -41,7 +41,7 @@ router.get('/getPage', async(req,res,next) => {
 })
 
 router.get('/getAll', async (req,res,next) => {
-   const candidate = await CandidateService.getAll(req.query);
+   const candidate = await candidateService.getAll(req.query);
    res.status(200).json({
       candidate
    });
@@ -65,7 +65,7 @@ router.post('/createCandidateList',
 			 p.additionalInfo = addiotnalInfo._id;
 			 const candidateStatus = await candidateStatusService.create(p);
 			p.candidateStatus = candidateStatus._id;
-			const createdCandidate = await CandidateService.create(p);
+			const createdCandidate = await candidateService.create(p);
 			if (createdCandidate != null)
 				res.status(200).send({createdCandidate});
 			else
@@ -84,7 +84,7 @@ router.post('/createCandidate',
    candidateMiddleware.preSaveCandidateStatus,
    async(req,res,next) => {
       try{
-         const createdCandidate = await CandidateService.create(req.body);
+         const createdCandidate = await candidateService.create(req.body);
          if (createdCandidate != null){
             res.status(200).send({createdCandidate});
             res.locals.createdOk = true;
@@ -105,7 +105,7 @@ router.post('/createCandidate',
 
 router.put('/updateCandidate', async(req,res,next) => {
    try{
-      const updatedCandidate = await CandidateService.updateByRg(req.body);
+      const updatedCandidate = await candidateService.updateByRg(req.body);
       if (updatedCandidate != null){
          res.locals.updatedOk = true;
          res.locals.additionalInfoId = updatedCandidate.additionalInfo;
@@ -127,7 +127,7 @@ router.put('/updateCandidate', async(req,res,next) => {
 
 router.delete('/deleteCandidate', async(req,res,next) => {
    try{
-      const deletedCandidate = await CandidateService.deleteByRg(req.query);
+      const deletedCandidate = await candidateService.deleteByRg(req.query);
       if (updatedCandidate != null){
          res.locals.deletedOk = true;
          res.status(200).send({deletedCandidate});
@@ -143,7 +143,7 @@ router.delete('/deleteCandidate', async(req,res,next) => {
 
 router.delete('/deleteCandidate/all', async(req,res,next) => {
    try{
-      const deletedCandidate = await CandidateService.deleteAll();
+      const deletedCandidate = await candidateService.deleteAll();
       res.status(200).send({deletedCandidate});
    }catch(error){
       console.log(error);

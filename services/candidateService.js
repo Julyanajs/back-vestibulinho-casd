@@ -1,5 +1,4 @@
 const CandidateModel = require('../models/CandidateModel');
-const AdditionalInfoModel = require('../models/AdditionalInfoModel');
 
 class CandidateService {
    

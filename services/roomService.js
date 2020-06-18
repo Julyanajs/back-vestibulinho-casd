@@ -50,5 +50,5 @@ async getAll(query) {
 
 }
 
-const RoomServiceInstance = new RoomService;
-module.exports = RoomServiceInstance;
+const roomServiceInstance = new RoomService;
+module.exports = roomServiceInstance;
