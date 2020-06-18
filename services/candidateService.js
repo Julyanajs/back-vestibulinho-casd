@@ -19,7 +19,7 @@ class CandidateService {
       return await CandidateModel.find(query).populate('additionalInfo').populate('candidateStatus').lean();
    }
 
-   async getPage(paginate){
+   async getPage(query){
       const defaultOptions = {
          page: 1,
          limit: 10,
@@ -29,8 +29,8 @@ class CandidateService {
          ]
       }
       const defaultQuery = {}
-
-      return await CandidateModel.paginate({...defaultQuery, ...paginate.query},{...defaultOptions, ...paginate.options});
+      console.log(paginate);
+      return await CandidateModel.paginate({...defaultQuery, ...query.paginate.query},{...defaultOptions, ...query.paginate.options});
    }
 
    async populateAll() {
