@@ -62,7 +62,7 @@ router.post('/createCandidate',
       try{
          const createdCandidate = await CandidateService.create(req.body);
          if (createdCandidate != null)
-            res.status(200).send({createdCandidate});
+            res.status(200).send({createdCandidate, createdOk: true});
          else
             res.status(403).send({ error: "Candidate already exists!" });
       }catch(error){
@@ -70,7 +70,9 @@ router.post('/createCandidate',
          res.status(400).send();
       }
       next();
-   }
+   },
+   candidateMiddleware.deleteAdditionalInfoIfError,
+   candidateMiddleware.deleteCandidateStatusIfError
 );
 
 
@@ -79,7 +81,7 @@ router.put('/updateCandidate', async(req,res,next) => {
    try{
       const updatedCandidate = await CandidateService.updateByRg(req.body);
       if (updatedCandidate != null)
-         res.status(200).send({updatedCandidate});
+         res.status(200).send({updatedCandidate, updatedOk: true});
       else
          res.status(404).send({ error: "Candidate doesn't exists!" });
    }catch(error){
@@ -87,13 +89,17 @@ router.put('/updateCandidate', async(req,res,next) => {
       res.status(400).send();
    }
    next();
-});
+},
+   candidateMiddleware.posUpdateAdditionalInfo,
+   candidateMiddleware.posUpdateCandidateStauts
+);
+
 
 router.delete('/deleteCandidate', async(req,res,next) => {
    try{
       const deletedCandidate = await CandidateService.deleteByRg(req.query);
       if (updatedCandidate != null)
-         res.status(200).send({deletedCandidate});
+         res.status(200).send({deletedCandidate, deletedOk: true});
       else
          res.status(202).send({ error: "Candidate doesn't exists!" });
    }catch(error){

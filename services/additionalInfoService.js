@@ -12,11 +12,18 @@ class additionalInfoService {
       return this.toObject(await additionalInfo.save()) 
    }
 
+   async updateById(additionalInfoData){
+      const additionalInfoExists = await additionalInfoModel.exists({_id:additionalInfoData._id})
+      if(!additionalInfoExists)
+         return;
+      additionalInfoModel.patchUpdate({_id:additionalInfoData._id}, additionalInfoData);
+   }
+
    async getById({_id}){
       return await additionalInfoModel.findById(_id).lean();
    }
 
-   async getBycep({cep}){
+   async getByCep({cep}){
       return await additionalInfoModel.findOne({cep}).lean();
    }
 
