@@ -7,7 +7,7 @@ const RoomService = require('../services/roomService');
 
 
 module.exports.SaveCandidatesList = async (req,res,next) => {
-	var wb=xlsx.readFile(__dirname+'/input_candidates.xlsx',{cellDates:true});
+	var wb=xlsx.readFile(__dirname+'/../public/input_candidates.xlsx',{cellDates:true});
    var ws=wb.Sheets["Sheet1"];
    var data=xlsx.utils.sheet_to_json(ws);
    console.log(data)
@@ -34,7 +34,7 @@ module.exports.SaveCandidatesList = async (req,res,next) => {
 }
 
 module.exports.SaveRoomList = async (req,res,next) => {
-	var wb=xlsx.readFile(__dirname+'/input_room.xlsx',{cellDates:true});
+	var wb=xlsx.readFile(__dirname+'/../public/input_room.xlsx',{cellDates:true});
    var ws=wb.Sheets["Sheet1"];
    var data=xlsx.utils.sheet_to_json(ws);
 	req.data=data;
