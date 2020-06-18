@@ -15,7 +15,7 @@ class CandidateService {
    }
 
    async getAll(query) {
-      return await CandidateModel.find().lean().populate('additionalInfo');
+      return await CandidateModel.find().populate('additionalInfo').populate('candidateStatus').lean();
    }
 
    async getPage(query){
