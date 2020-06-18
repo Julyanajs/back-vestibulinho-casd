@@ -29,7 +29,7 @@ class CandidateService {
          ]
       }
       const defaultQuery = {}
-      return await CandidateModel.paginate({...defaultQuery, ...query},{...defaultOptions, ...query});
+      return await CandidateModel.paginate({...defaultQuery},{...defaultOptions, ...query});
    }
 
    async populateAll() {
