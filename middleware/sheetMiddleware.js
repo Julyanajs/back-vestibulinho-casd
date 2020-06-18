@@ -57,8 +57,12 @@ module.exports.exportExcel = async (req,res,next) => {
    const candidate = await CandidateService.getAll();
    var newWB=xlsx.utils.book_new(); 
    var newWS=xlsx.utils.json_to_sheet(candidate);
+
    xlsx.utils.book_append_sheet(newWB,newWS,"OUTPUT");
-   xlsx.writeFile(newWB,__dirname+"/Output.xlsx");
+   const pathXlsx = __dirname + "/../public/Output.xlsx";
+   xlsx.writeFile(newWB,pathXlsx);
+   await res.download(pathXlsx);
+   res.status(200).send();
    //console.log(candidate);
    next();
 

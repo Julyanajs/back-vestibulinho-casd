@@ -19,6 +19,10 @@ class CandidateService {
       return await CandidateModel.find().populate('additionalInfo').populate('candidateStatus').lean();
    }
    
+   async paginateAll({numberPerPage}){
+      return await CandidateModel.paginate({}, {populate:['additionalInfo', 'candidateStatus'], lean:true});
+   }
+
    async populateAll() {
 	   const listCandidates = await CandidateModel.find();
 	 
