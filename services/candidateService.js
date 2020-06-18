@@ -19,34 +19,31 @@ class CandidateService {
       return await CandidateModel.find().lean();
    }
    
- async populateAll() {
-	const listCandidates = await CandidateModel.find();
+   async populateAll() {
+	   const listCandidates = await CandidateModel.find();
 	 
-	const populatedList = listCandidates.map(async  p=> {
-		console.log(p)
-		p = await p.populate('additionalInfo')
-		console.log(p)
-	});
+	   const populatedList = await listCandidates.map(async  p=> {
+		   console.log(p)
+		   p = await p.populate('additionalInfo');
+         console.log(p)
+         p = await p.populate('candidateStauts');
+	   });
 	 return populatedList;
    }
    
-   
-   
-   
-   
    async getById({_id}){
-      return await CandidateModel.findById(_id).lean();
+      return await CandidateModel.findById(_id).populate('additionalInfo').populate('candidateStatus').lean();
    }
 
    async getByRg({rg}){
-      return await CandidateModel.findOne({rg}).lean();
+      return await CandidateModel.findOne({rg}).populate('additionalInfo').populate('candidateStatus').lean();
    }
 
    async updateByRg(CandidateData) {
       let candidateExists = await CandidateModel.exists({rg: CandidateData.rg});
       if (!candidateExists)
          return null;
-      return await CandidateModel.replaceOne({rg: CandidateData.rg}, CandidateData)
+      return await CandidateModel.patchUpdate({rg: CandidateData.rg}, CandidateData);
    }
 
    async deleteByRg({rg}) {
