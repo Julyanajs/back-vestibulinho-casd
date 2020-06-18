@@ -1,7 +1,7 @@
 const express = require('express');
 const CandidateService = require('../services/candidateService');
 const candidateMiddleware = require("../middleware/candidateMiddleware");
-const ListMiddleware = require("../middleware/sheetMiddleware");
+const sheetMiddleware = require("../middleware/sheetMiddleware");
 
 
 const router = express.Router();
@@ -31,13 +31,13 @@ router.get('/checkCandidate/all', async (req,res,next) => {
 router.get('/exportCandidate/all', async (req,res,next) => {
  
 	 next();
-}, ListMiddleware.exportExcel);
+}, sheetMiddleware.exportExcel);
 
 
 router.post('/createCandidateList',
-	ListMiddleware.SaveCandidatesList,
-	ListMiddleware.preSaveAdditionalInfoList,
-	ListMiddleware.preSaveCandidateStatusList,
+	sheetMiddleware.SaveCandidatesList,
+	sheetMiddleware.preSaveAdditionalInfoList,
+	sheetMiddleware.preSaveCandidateStatusList,
    async(req,res,next) => {	   
 	   req.data.forEach(async p => {		 
 			try{
@@ -47,10 +47,9 @@ router.post('/createCandidateList',
 			else
 				res.status(403).send({ error: "Candidate already exists!" });
 		}catch(error){
-		//	console.log(error);
-		//	res.status(400).send();
+		   console.log(error);
+			res.status(400).send();
       }
-		//	next();
 		})
       next();	  
    });
@@ -114,6 +113,5 @@ router.delete('/deleteCandidate/all', async(req,res,next) => {
    }
    next();
 });
-
 
 module.exports = router;

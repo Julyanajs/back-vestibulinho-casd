@@ -17,9 +17,17 @@ const CandidateStatusSchema = new mongoose.Schema({
 
    exemptionStatus: {
       type: mongoose.Schema.Types.Boolean,
-      default: false,
+      required: false,
       description: "Booleana que diz se a pessoa esta isenta de pagar a inscrição"
    },
+
+   testPresence:{
+      type: mongoose.Schema.Types.Boolean,
+      required: false,
+      description: "Booleana que fala se a pessoa esteve presente"
+   },
+
+
 
    roomId: {
       type: mongoose.Schema.Types.String,
@@ -33,25 +41,38 @@ const CandidateStatusSchema = new mongoose.Schema({
       description: "Nota do candidato"
    },
 
-   esSummon: {
-      type: mongoose.Schema.Types.Date,
+   esDate: {
+      type: mongoose.Schema.Types.String,
       required: false,
       description: "Data que o aluno deve se apresentar para a entrevista socioeconômica"
    },
 
-   esStatus: {
+   esTime: {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      description: "Horário em que o aluno deve se apresentar para a entrevista socioeconômica na data escolhida"
+   },
+
+   esPresence: {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      description: "Booleana que diz se a pessoa esteve presente na entrevista socioeconômica"
+   },
+
+   esResult: {
       type: mongoose.Schema.Types.Boolean,
       required: false,
       description: "Status de aprovação na entrevista socioeconômica",
    },
 
-   registerSummon:{
+
+   summonNumber:{
       type: mongoose.Schema.Types.Number,
       required: false,
       description: "Número da chamada para matrícula do aluno"
    },
 
-   regiserSatus:{
+   enrollSatus:{
       type: mongoose.Schema.Types.Boolean,
       required: false,
       description: "Se o aluno está matriculado ou não no curso"
