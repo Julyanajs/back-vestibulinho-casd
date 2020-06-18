@@ -15,10 +15,28 @@ class CandidateService {
       return this.toObject(await Candidate.save()) 
    }
 
-   async getAll() {
-      return await CandidateModel.find().lean();
+   async getAll(query) {
+      return await CandidateModel.find(query).populate('additionalInfo').populate('candidateStatus').lean();
    }
-   
+
+   async getPage(query){
+      const defaultOptions = {
+         page: 1,
+         limit: 10,
+         populate:[
+            "additionalInfo",
+            "candidateStatus"
+         ]
+      }
+      const defaultQuery = {}
+      if(query.page <= 0)
+         query.page = defaultOptions.page;
+      if(limit <= 0)
+         query.limit = defaultOptions.limit;
+      
+      return await CandidateModel.paginate({...defaultQuery},{...defaultOptions, ...query});
+   }
+
    async populateAll() {
 	   const listCandidates = await CandidateModel.find();
 	 
