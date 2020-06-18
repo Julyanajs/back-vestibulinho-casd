@@ -29,7 +29,6 @@ class CandidateService {
          ]
       }
       const defaultQuery = {}
-      console.log(paginate);
       return await CandidateModel.paginate({...defaultQuery, ...query},{...defaultOptions, ...query});
    }
 
