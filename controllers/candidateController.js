@@ -19,6 +19,14 @@ router.get('/checkCandidate', async (req,res,next) => {
    next();
 });
 
+router.get('/getPage', async(req,res,next) => {
+   const candidate = await CandidateService.getPage(req.query);
+   res.status(200).json({
+      candidate
+   });
+   next();
+})
+
 router.get('/getAll', async (req,res,next) => {
    const candidate = await CandidateService.getAll(req.query);
    res.status(200).json({
