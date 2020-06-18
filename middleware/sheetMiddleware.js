@@ -60,10 +60,9 @@ module.exports.exportExcel = async (req,res,next) => {
 
    xlsx.utils.book_append_sheet(newWB,newWS,"OUTPUT");
    const pathXlsx = __dirname + "/../public/Output.xlsx";
-   xlsx.writeFile(newWB,pathXlsx);
-   await res.download(pathXlsx);
-   res.status(200).send();
-   //console.log(candidate);
+   await xlsx.writeFile(newWB,pathXlsx);
+   res.download(pathXlsx).send();
+   
    next();
 
 }
