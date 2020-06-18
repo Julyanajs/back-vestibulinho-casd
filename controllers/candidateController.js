@@ -19,6 +19,19 @@ router.get('/checkCandidate', async (req,res,next) => {
    next();
 });
 
+router.get('/checkCandidateId', async(req,res,next) => {
+   try{
+      const candidate = await CandidateService.getById(req.query);
+      if(candidate != null)
+         res.status(201).json({candidate});
+      else
+         res.status(204).send();
+   }catch{
+      res.status(404).send({error: "Error"});
+   }
+   next();
+});
+
 router.get('/getPage', async(req,res,next) => {
    const candidate = await CandidateService.getPage(req.query);
    res.status(200).json({

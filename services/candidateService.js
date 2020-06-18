@@ -29,6 +29,11 @@ class CandidateService {
          ]
       }
       const defaultQuery = {}
+      if(query.page <= 0)
+         query.page = defaultOptions.page;
+      if(limit <= 0)
+         query.limit = defaultOptions.limit;
+      
       return await CandidateModel.paginate({...defaultQuery},{...defaultOptions, ...query});
    }
 
