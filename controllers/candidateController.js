@@ -20,6 +20,7 @@ router.get('/checkCandidate', async (req,res,next) => {
 });
 
 router.get('/getPage', async(req,res,next) => {
+   console.log(req.query);
    const candidate = await CandidateService.getPage(req.query);
    res.status(200).json({
       candidate
