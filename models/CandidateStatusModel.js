@@ -16,9 +16,16 @@ const CandidateStatusSchema = new mongoose.Schema({
    },
 
    exemptionStatus: {
-      type: mongoose.Schema.Types.Boolean,
+      type: mongoose.Schema.Types.String,
       required: false,
+      default: "notRequired",
       description: "Booleana que diz se a pessoa esta isenta de pagar a inscrição"
+   },
+
+   exemptionJustification: {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      description: "Motivo do pedido de isenção"
    },
 
    testPresence:{
