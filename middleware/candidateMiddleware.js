@@ -39,6 +39,7 @@ module.exports.deleteCandidateStatusIfError = async(req,res,next) => {
 }
 
 module.exports.posUpdateCandidateStauts = async(req, res, next) => {
+   console.log(res.locals.udpatedOk);
    if(!res.locals.udpatedOk)
       next();
    else{
@@ -50,8 +51,9 @@ module.exports.posUpdateCandidateStauts = async(req, res, next) => {
 }
 
 module.exports.posUpdateAdditionalInfo = async(req,res,next) => {
+   console.log(res.locals.udpatedOk);
    if(!res.locals.udpatedOk)
-      return;
+      next();
    else{
       const additionalInfoData = req.body;
       additionalInfoData._id = req.body.addiotnalInfo;
