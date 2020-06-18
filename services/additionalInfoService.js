@@ -35,5 +35,5 @@ class AdditionalInfoService {
    }
 }
 
-const AdditionalInfoServiceInstance = new additionalInfoService();
-module.exports = AdditionalInfoServiceInstance
+const additionalInfoServiceInstance = new AdditionalInfoService();
+module.exports = additionalInfoServiceInstance

@@ -75,5 +75,5 @@ class CandidateService {
    }
 }
 
-const CandidateServiceInstance = new CandidateService();
-module.exports = CandidateServiceInstance
+const candidateServiceInstance = new CandidateService();
+module.exports = candidateServiceInstance
