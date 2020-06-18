@@ -92,7 +92,8 @@ const additionalInfoSchema = new mongoose.Schema({
       type:mongoose.Schema.Types.String,
       required:true,
       description:"Qual tipo Escola"
-   },      
+   },
+
 }, {
    timestamps:true
 });
